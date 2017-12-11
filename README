@@ -1,0 +1,10 @@
+TO COMPILE (AND RUN)
+
+JULIA
+	julia highc.jl
+
+FORTRAN90
+	gfortran highc.f90
+	./a.out
+GO
+	go run highc.go
