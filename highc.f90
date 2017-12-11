@@ -5,16 +5,16 @@
 
 program highc
 
-integer :: miniVal
-integer :: maxiVal
-integer :: maxFound
-integer :: start
+integer :: miniVal      ! MINIMUM STARTING VALUE
+integer :: maxiVal      ! MAXIMUM STARTING VALUE
+integer :: maxFound     ! MAXIMUM CALCULATED VALUE
+integer :: start        ! TEMPORY STARTING VALUE
 
-! RECURSIVE COLLATZ RETRIEVAL METHOD
+! RECURSIVE COLLATZ RETRIEVAL METHOD INTERFACE
 interface
 subroutine getCollatz( start, maxFound )
-        integer :: start
-        integer :: maxfound
+        integer :: start        ! TEMPORARY STARTING VARIABLE
+        integer :: maxfound     ! MAXIMUM CALCULATED VALUE
 end subroutine getCollatz
 end interface
 
@@ -25,6 +25,7 @@ read(*,*) miniVal
 write(*,*) "Input the Minimum Value: "
 read(*,*) maxiVal
 
+! SET THE MAX CALC VARIABLE TO THE STARTING MIN VALUE
 maxFound = miniVal
 
 ! FOR EACH STARTING VALUE WITHIN THE USER INPUTTED RANGE,
@@ -36,6 +37,7 @@ do i= miniVal, maxiVal, 1
         call getCollatz( start, maxFound )
 enddo
 
+! OUTPUT THE RESULTS
 write(*,*) "Max Calculated Value: ", maxFound
 
 end program highc
@@ -46,14 +48,15 @@ end program highc
 ! VALUE OVERALL
 recursive subroutine getCollatz( start, maxFound )
 
-        integer :: start
-        integer :: maxFound
+        integer :: start        ! TEMPORARY STARTING VALUE
+        integer :: maxFound     ! MAX CALC VALUE
 
         if( start /= 1 ) then
 
                 if ( mod( start, 2 ) == 0 ) then
                         start = start / 2
 
+                        ! COMPARE CURR CALC TO MAX CALC
                         if( start > maxFound ) then
                                 maxFound = start
                         endif
@@ -62,6 +65,7 @@ recursive subroutine getCollatz( start, maxFound )
                 else
                         start = (3*start)+1
 
+                        ! COMPARE THE CURR CALC TO THE MAX CALC
                         if( start > maxFound ) then
                                 maxFound = start
                         endif
@@ -69,6 +73,5 @@ recursive subroutine getCollatz( start, maxFound )
                         call getCollatz( start, maxFound )
                 endif
         end if
-
 
 end subroutine getCollatz
